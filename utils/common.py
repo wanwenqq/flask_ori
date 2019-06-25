@@ -5,6 +5,8 @@ import hmac
 
 
 def isPhone(phone):
+    if phone is  None:
+        return False    
     return re.match(r"^1[356789]\d{9}$", phone) == None
 
 

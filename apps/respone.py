@@ -7,7 +7,7 @@ class ResponseCode:
     MESSAGE = '处理成功！'
 
 
-def make_respone(data=None, message=ResponseCode.MESSAGE, status=ResponseCode.SUCCESS):
+def make_respone(data=None, status=ResponseCode.SUCCESS,message=ResponseCode.MESSAGE ):
     return jsonify({
         'message': message,
         'status': status,
@@ -20,6 +20,6 @@ def my_abort(http_status_code, *args, **kwargs):
         # 重定义400返回参数
         # print(args)
         # print(kwargs)
-        abort(400, **make_respone(data=[kwargs.get('message')], message='请求接口有错误！', status=http_status_code))
+        abort(400, **make_respone(data=[kwargs.get('message')],  status=http_status_code,message='请求接口有错误！'))
 
     abort(http_status_code)

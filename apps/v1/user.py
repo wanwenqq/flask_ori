@@ -7,7 +7,7 @@ from exts import db
 from apps.decorators import login_required
 import config
 
-bp = Blueprint('cms', __name__, url_prefix='/v1')
+bp = Blueprint('user', __name__, url_prefix='/v1')
 
 class BaseView(views.MethodView):
     def __init__(self):
@@ -75,9 +75,9 @@ class RegisterView(BaseView):
                 return make_respone(None,600,'注册失败')
 
 
-bp.add_url_rule(rule='/register/',view_func=RegisterView.as_view('register'))
-bp.add_url_rule(rule='/login/',view_func=LoginView.as_view('login'))
-bp.add_url_rule(rule='/user/',view_func=UserView.as_view('user'))
+bp.add_url_rule(rule='/register',view_func=RegisterView.as_view('register'))
+bp.add_url_rule(rule='/login',view_func=LoginView.as_view('login'))
+bp.add_url_rule(rule='/user',view_func=UserView.as_view('user'))
 
 @bp.route('/')
 @login_required
