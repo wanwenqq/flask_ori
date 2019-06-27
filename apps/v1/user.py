@@ -1,8 +1,8 @@
-from flask import views,Blueprint,request,jsonify
+from flask import views,Blueprint,request
 from utils import common
 from .models import User
 from apps.respone import make_respone
-from utils.redistool import RedisCache
+from utils.redistool import RedisCacheRedisCache
 from exts import db
 from apps.decorators import login_required
 import config

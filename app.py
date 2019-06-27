@@ -1,7 +1,7 @@
 from flask import Flask,request
 import config
 from exts import db
-from apps.v1 import user_bp
+from apps.v1 import user_bp,data_bp
 from apps.respone import my_abort,make_respone
 from utils.common import certify_token
 from apps.ips import ips
@@ -12,6 +12,7 @@ app.config.from_object(config)
 db.init_app(app)
 
 app.register_blueprint(user_bp)
+app.register_blueprint(data_bp)
 
 @app.route('/')
 def index():
@@ -39,15 +40,15 @@ def print_request_info():
     #也可做ip检查，以阻挡受限制的ip等
     if filter_request(request):
         return make_respone(None,403,'你被禁了')
-    if is_auth_request(request):
-        token = request.headers.get('Token',None)
-        if not token:
-            # 如果 header中没有Token需要重新登录
-            return make_respone(None,403,'没有权限，请重新登录')
-        else:
-            if not certify_token(config.TOKEN_KEY,token):
-                # 如果 header中有Token但是校验没有通过
-                return make_respone(None,403,'没有权限，请重新登录')
+    # if is_auth_request(request):
+    #     token = request.headers.get('Token',None)
+    #     if not token:
+    #         # 如果 header中没有Token需要重新登录
+    #         return make_respone(None,403,'没有权限，请重新登录1')
+    #     else:
+    #         if not certify_token(config.TOKEN_KEY,token):
+    #             # 如果 header中有Token但是校验没有通过
+    #             return make_respone(None,403,'没有权限，请重新登录2')
 
 # 非鉴权请求
 def is_auth_request(request):
