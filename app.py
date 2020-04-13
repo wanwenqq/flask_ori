@@ -1,3 +1,11 @@
+'''
+@Author: Anders
+@Date: 2019-06-20 09:03:31
+@LastEditTime: 2020-04-13 10:50:04
+@LastEditors: Anders
+@FilePath: \pythond:\project\flaskvue\flask_ori\app.py
+@Description: 
+'''
 from flask import Flask,request
 import config
 from exts import db
@@ -7,19 +15,25 @@ from utils.common import certify_token
 from apps.ips import ips
 from apps.auths import auths
 
-app  = Flask(__name__)
-app.config.from_object(config)
-db.init_app(app)
 
+# 应用初始化
+app  = Flask(__name__)
+# 配置文件
+app.config.from_object(config)
+# 初始化数据库
+db.init_app(app)
+# 注册所有蓝图
 app.register_blueprint(user_bp)
 app.register_blueprint(data_bp)
+
+# 自定义异常处理
+app.abort = my_abort
+
+
 
 @app.route('/')
 def index():
     return 'index'
-
-app.abort = my_abort
-
 
 @app.before_request
 def print_request_info():
@@ -66,6 +80,7 @@ def filter_request(request):
 def after_request(resp):
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
+
 
 app.after_request(after_request)
 

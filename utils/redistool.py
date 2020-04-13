@@ -1,3 +1,5 @@
+#-*- coding:utf-8 -*-
+
 import redis
 import config
 
@@ -19,7 +21,7 @@ class RedisCache(object):
     self._connection = redis.Redis(connection_pool = RedisCache.pool)
 
 #   @staticmethod
-  def create_pool():
+  def create_pool(self):
     RedisCache.pool = redis.ConnectionPool(
         host = config.REDIS_HOST,
         port = config.REDIS_PORT,

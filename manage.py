@@ -1,3 +1,11 @@
+'''
+@Author: Anders
+@Date: 2019-06-20 09:40:56
+@LastEditTime: 2020-04-07 14:31:54
+@LastEditors: Anders
+@FilePath: \pythond:\project\flaskvue\flask_ori\manage.py
+@Description: 
+'''
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from app import app
@@ -23,3 +31,4 @@ def m_create_user(username,password,phone):
 
 if __name__ == '__main__':
     manager.run()
+
