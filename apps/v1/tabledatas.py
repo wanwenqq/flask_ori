@@ -1,3 +1,11 @@
+'''
+@Author: Anders
+@Date: 2019-06-27 17:36:11
+@LastEditTime: 2020-04-13 15:23:14
+@LastEditors: Anders
+@FilePath: \pythond:\project\flaskvue\flask_ori\apps\v1\tabledatas.py
+@Description: 
+'''
 from flask import views,request,Blueprint
 from apps.respone import make_respone
 
@@ -18,7 +26,7 @@ class DataView(BaseView):
     def post(self):
         self.respone['data'] = [{
             "date": "1997-11-11",
-            "name": "林丽",
+            "name": "林丽丽",
             "address": "吉林省 辽源市 龙山区"
         }, {
             "date": "1987-09-24",

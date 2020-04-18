@@ -7,6 +7,8 @@ from exts import db
 from apps.decorators import login_required
 import config
 
+import json
+
 bp = Blueprint('user', __name__, url_prefix='/v1')
 
 class BaseView(views.MethodView):
@@ -30,8 +32,10 @@ class LoginView(BaseView):
             'token':None
         }
     def post(self):
-        phone = request.values.get('phone')
-        password = request.values.get('password')
+        data = request.get_data()
+        json_re = json.loads(data)
+        phone = json_re['phone']
+        password = json_re['password']
         if common.isPhone(phone) or password is None:
             # return make_respone(data={},message='用户名或密码错误',status=601)
             return make_respone(None,400,'用户名或密码错误')
@@ -60,8 +64,10 @@ class RegisterView(BaseView):
         }
 
     def post(self):
-        phone = request.values.get('phone')
-        password = request.values.get('password')
+        data = request.get_data()
+        json_re = json.loads(data)
+        phone = json_re['phone']
+        password = json_re['password']
         if common.isPhone(phone) or password is None:
             return make_respone(None,400,'用户名或密码设置错误')
         else:

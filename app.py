@@ -86,4 +86,4 @@ app.after_request(after_request)
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=False)
