@@ -78,7 +78,14 @@ def filter_request(request):
 
 # 跨域支持
 def after_request(resp):
+    # //允许所有来源访问
     resp.headers['Access-Control-Allow-Origin'] = '*'
+    # //用于判断request来自ajax还是传统请求
+    resp.headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept'
+    # //允许访问的方式
+    resp.headers['Access-Control-Allow-Methods'] = 'PUT,POST,GET,DELETE,OPTIONS'
+    # //内容类型：如果是post请求必须指定这个属性
+    resp.headers['Content-Type'] = 'application/json;charset=utf-8'
     return resp
 
 
